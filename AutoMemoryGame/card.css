@@ -1,0 +1,197 @@
+
+#card{
+  position: absolute;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+  justify-content: center;
+	margin-left: 50px;
+}
+#card li{
+	cursor: pointer;
+}
+#card li img{
+	position: relative;
+	width: 100%;
+}
+#card li.off,
+#card li.lock {
+	pointer-events : none;
+}
+#card li.off img{
+	transition-property: opacity;
+	transition-duration: 0.5s;
+	opacity: 0;
+}
+.frame{
+  position: absolute;
+  /*height: 90px;*/
+  color: #fff;
+  font-size: 20px;
+  font-family: meyrio,"メイリオ",sans-serif;
+  padding: 3px 2px 0;
+  border-style: solid;
+  border-width: 20px 26px;
+  /*
+  -moz-border-image: url(../image/pipo-WindowBase001.png) 10;
+  -webkit-border-image: url(../image/pipo-WindowBase001.png) 10;
+  -o-border-image: url(../image/pipo-WindowBase001.png) 10;
+  */
+  border-image: url(../image/frame2.png) 20 26 fill stretch;
+  box-sizing:border-box;
+  text-shadow: 1px 1px rgba(0,0,0,0.5);
+}
+.frame.playtime{
+  top: 300px;
+  right: 40px;
+  width: 170px;
+}
+.frame.card_num{
+  top: 220px;
+  right: 40px;
+  width: 170px;
+}
+.frame span{
+  font-size: 22px;
+}
+.frame.playtime span{
+  display: block;
+  letter-spacing: 5px;
+}
+.frame.card_num span{
+  margin: 0 0.7em;
+}
+.game_setting {
+  width: 100%;
+  height: 100%;
+}
+.game_setting .title {
+  font-size: 30px;
+  font-weight: bold;
+  top: 220px;
+  left: 55px;
+  width: 450px;
+  text-align: center;
+}
+.game_setting .title span {
+  font-size: 16px;
+  font-weight: normal;
+  margin-left: 1em;
+}
+.game_setting .messe{
+  font-size: 14px;
+  font-weight: normal;
+  text-align: left;
+  line-height: 1.8;
+  margin-top: 0.5em;
+}
+.game_setting .config {
+  font-size: 16px;
+  top: 435px;
+  left: 55px;
+}
+.game_setting .config p {
+  width: 100%;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+.game_setting .config > div {
+  font-size: 14px;
+}
+.game_setting .config label {
+  display: inline-block;
+  width:8em;
+}
+.game_setting .config select {
+  border-radius: 6px;
+  padding-left: 8px;
+  margin: 3px 0;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: "メイリオ",Meiryo,Helvetica,Arial,"游ゴシック",YuGothic,"ヒラギノ角ゴ ProN W3","Hiragino Kaku Gothic ProN","ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+  background: linear-gradient(
+      to bottom,
+      #fff 0%,
+      #eee 70%,
+      #ccc 100%);
+}
+.credit {
+  padding: 5px 20px;
+  font-size: 14px;
+  width: 440px;
+}
+.credit p {
+}
+.credit dl {
+}
+.credit dt {
+  margin-top: 1em;
+  font-size: 16px;
+}
+.credit dd {
+  margin-left: 1.5em;
+}
+.credit dd a:link{
+  color: #fff;
+  text-decoration : none;
+}
+.credit dd a:link,
+.credit dd a:visited,
+.credit dd a:hover,
+.credit dd a:active {
+  color: #fff;
+  text-decoration : none;
+}
+.loading{
+  display: flex;
+  width: 100%;
+}
+.loading dl {
+  display: flex;
+  width: 500px;
+  margin: 25% auto;
+}
+.loading dt {
+  width: 120px;
+  height: 120px;
+  margin-right: 5px;
+  background: url(../image/ac05.png) no-repeat top left;
+  background-size: cover;
+  position: relative;
+}
+.loading dd {
+  flex:1;
+  align-self:flex-end;
+  height: 60px;
+  padding: 0 25px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  line-height: 60px;
+  background-color: #fff;
+  border-radius: 8px;
+  position: relative;
+}
+.loading dd:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 3px;
+    left: -19px;
+    border: 8px solid transparent;
+    border-right: 18px solid #fff;
+    -ms-transform: rotate(35deg);
+    -webkit-transform: rotate(35deg);
+    transform: rotate(35deg);
+}
+
+/* システム用 */
+#tyrano_base{
+  margin: auto !important;
+  font-family: "メイリオ",Meiryo,Helvetica,Arial,"游ゴシック",YuGothic,"ヒラギノ角ゴ ProN W3","Hiragino Kaku Gothic ProN","ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+}
+
+.test {
+  top: 270px;
+  left: 735px;
+}
