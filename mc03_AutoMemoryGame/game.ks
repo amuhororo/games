@@ -122,7 +122,7 @@
   f.playtime = 0;
   f.playtime_disp = 0;
   f.playtime_counting = false;
-  setInterval(function(){
+  var GameTime = setInterval(function(){
     if(f.playtime_counting==true){
       ++f.playtime;
       min = parseInt((f.playtime / 600) % 60);
@@ -347,8 +347,20 @@
             $("#card li img").each(function(i){//カード時間差で表示
               $(this).delay(30*i).animate({opacity:'1'},1);
             });
+            clearInterval(GameTime);
             setTimeout(function(){  //クリアアラート
-              alert("クリアー！　タイム "+f.playtime_disp);
+              //alert("クリアー！　タイム "+f.playtime_disp);
+              $(".remodal").find(".remodal-confirm").html("タイトルに戻る");
+              $(".remodal").find(".remodal-cancel").html("もう一回！");
+              $(".remodal-overlay,.remodal-wrapper").css("z-index",99999999);//フリーレイヤーの上に表示
+              $.confirm("クリアー！　タイム "+f.playtime_disp,
+                function(){
+                  TG.kag.ftag.startTag("jump", {"target":"start"});
+                },
+                function(){
+                  TG.kag.ftag.startTag("jump", {"target":"game"});
+                }
+              );
             }, 30*f.card_total+200);
           } else unlock();  //全てのカードの.lockを削除
         }
