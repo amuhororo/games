@@ -72,6 +72,22 @@
   if(!f.card_column) f.card_column = 7;                        //列数
   if(!f.card_line) f.card_line = 6;                            //行数
 
+  //タイマー
+  f.playtime_counting = false;
+  clearInterval(f.GameTime);
+  f.GameTime = setInterval(function(){
+    if(f.playtime_counting==true){
+      ++f.playtime;
+      min = parseInt((f.playtime / 600) % 60);
+			sec = parseInt((f.playtime/10)) % 60;
+      msec = f.playtime % 10;
+			if(min < 10) { min = "0" + min; }
+			if(sec < 10) { sec = "0" + sec; }
+      f.playtime_disp = min + ':' + sec + '.' + msec;
+			$(".playtime span").text(f.playtime_disp);
+    }
+  }, 100);
+
   //ゲーム設定
   $("#card_imgnum select").val(f.card_img);
   $("#card_column select").val(f.card_column);
@@ -118,23 +134,6 @@
   $(".layer_free").append("<div class='frame card_num'>絵柄<span>"+f.card_img+"</span>種</div>");
   $(".layer_free").show();
 
-  //タイマー
-  f.playtime = 0;
-  f.playtime_disp = 0;
-  f.playtime_counting = false;
-  var GameTime = setInterval(function(){
-    if(f.playtime_counting==true){
-      ++f.playtime;
-      min = parseInt((f.playtime / 600) % 60);
-			sec = parseInt((f.playtime/10)) % 60;
-      msec = f.playtime % 10;
-			if(min < 10) { min = "0" + min; }
-			if(sec < 10) { sec = "0" + sec; }
-      f.playtime_disp = min + ':' + sec + '.' + msec;
-			$(".playtime span").text(f.playtime_disp);
-    }
-  }, 100);
-
   //変数指定
   f.card_total = f.card_column * f.card_line;                  //総数
   f.card_rem = Math.floor(f.card_total%(f.card_img*2));        //余り
@@ -158,6 +157,10 @@
   tf.line = [];                                    //カードの位置(行)
   tf.column = [];                                  //カードの位置(列)
   tf.card_open = [];                               //自動で開くカード
+
+  //タイマー
+  f.playtime = 0;
+  f.playtime_disp = 0;
 
   //カードを用意
   for(var i=1; i<=f.card_img; i++) {
@@ -347,7 +350,6 @@
             $("#card li img").each(function(i){//カード時間差で表示
               $(this).delay(30*i).animate({opacity:'1'},1);
             });
-            clearInterval(GameTime);
             setTimeout(function(){  //クリアアラート
               //alert("クリアー！　タイム "+f.playtime_disp);
               $(".remodal").find(".remodal-confirm").html("タイトルに戻る");
