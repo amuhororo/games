@@ -1,4 +1,4 @@
-*start 
+*start
 	@stop_keyconfig
 	@free_layermode
 	@freeimage layer=1 time=0
@@ -8,7 +8,7 @@
 	[iscript]
 		;プレイ時間
 	  TG.stat.is_counting=false;
-	  
+
 	  ;変数初期化
 	  f={}
 	  tf={}
@@ -39,13 +39,13 @@
 	[keyframe name="cup_anim_stop"]
 		@frame p=0% y="-110" rotate="45deg" opacity=1
 	[endkeyframe]
-	
+
 	;カップ影
 	@image storage="cup_shadow.png" layer=1 x=650 y=525 name="cupshadow" zindex=1 time=0 width=120
 	@image storage="cup_shadow.png" layer=1 x=200 y=525 name="cupshadow" zindex=1 time=0 width=120
 	@image storage="cup_shadow.png" layer=1 x=420 y=525 name="cupshadow" zindex=1 time=0 width=120
 	@anim name=cupshadow opacity=0 time=0
-	
+
 	;カップ振ってくる
 	@anim name=cupshadow opacity=255 time=400
 	@image storage="cup.png" layer=1 x=420 y=-150 name="cup0,cup" zindex=3 time=0 width=120
@@ -73,6 +73,7 @@
 	;ver表記
 	@ptext layer=1 name="copy,open" x=420 y=235 size=18 text=&sf.game_ver color="0xeeeeee" face="kokuban" time=0 wait=false
 
+
 	;ボタン
 	@button x=855 y=15 graphic="button_config.png" enterimg="button_config_on.png" name="config,open,button"  storage="config.ks" role="sleepgame" clickse=Onmtp-Click02-1.ogg enterse=Accent32-1.ogg width=80
 	@button x=750 y=15 graphic="button_rule.png" enterimg="button_rule_on.png" name="credit,open,button" storage="rule.ks" role="sleepgame" clickse=Onmtp-Click02-1.ogg enterse=Accent32-1.ogg width=80
@@ -83,8 +84,8 @@
 	[iscript]
 		TG.menu.button_screen_redraw();
 	[endscript]
-	;@button fix=true name="fullscreen" role="fullscreen" graphic=&f.screenfull enterimg=&f.screenfull_on x=15 y=538 clickse=cancel2.ogg enterse=Accent32-1.ogg width=80	
-	
+	;@button fix=true name="fullscreen" role="fullscreen" graphic=&f.screenfull enterimg=&f.screenfull_on x=15 y=538 clickse=cancel2.ogg enterse=Accent32-1.ogg width=80
+
 	;ボタン、ver表記opacity
 	[anim name=open opacity=0 time=0]
 	[anim name=open opacity=255 time=500]
@@ -118,7 +119,31 @@
 		);
 	[endscript]
 
-	[s]
+	;TGFエンブレム
+	@image storage="tgf_emb.png" folder=image x=20 y=300 width=140 layer=1 zindex=10 name=shadow
+
+
+	;バッジ取得ボタン
+	@ptext name=badge,badge_area x=&380+450 y=540 layer=1 text=""
+	@image name=badge,glay storage="badge1.png" folder=image x=&510+450 y=550 width=130 layer=1 cond="sf.mode_flag<1 || sf.mode_flag==undefined"
+	@image name=badge,glay storage="badge2.png" folder=image x=&660+450 y=550 width=130 layer=1 cond="sf.mode_flag<2 || sf.mode_flag==undefined"
+	@image name=badge,glay storage="badge3.png" folder=image x=&810+450 y=550 width=130 layer=1 cond="sf.mode_flag<3 || sf.mode_flag==undefined"
+	@button name=button,badge graphic="badge1.png" target="badge1" x=&510+450 y=550 width=130 fix=true clickse=Onmtp-Click02-1.ogg enterse=Accent32-1.ogg cond="sf.mode_flag>=1"
+	@button name=button,badge graphic="badge2.png" target="badge2" x=&660+450 y=550 width=130 fix=true clickse=Onmtp-Click02-1.ogg enterse=Accent32-1.ogg cond="sf.mode_flag>=2"
+	@button name=button,badge graphic="badge3.png" target="badge3" x=&810+450 y=550 width=130 fix=true clickse=Onmtp-Click02-1.ogg enterse=Accent32-1.ogg cond="sf.mode_flag>=3"
+	@glink name=badge,badge_btn,open x=&380+450 y=540 text=クリアバッジ size=16 color=0xffffff width=130 target=badge_on
+	@s
+
+	*badge_on
+	;バッジ取得ボタンオープン
+	@glink name=badge,badge_btn,close x=&380+450 y=540 text=クリアバッジ size=16 color=0xffffff width=130 target=badge_close
+	@anim name=badge layer=1 left="-=450" time=250
+	@s
+
+	*badge_close
+	@glink name=badge,badge_btn,open x=380 y=540 text=クリアバッジ size=16 color=0xffffff width=130 target=badge_on
+	@anim name=badge layer=1 left="+=450" time=250
+	@s
 
 
 	;ニューゲーム
@@ -152,3 +177,16 @@
 	[web url="http://hororo.wp.xdomain.jp/185/"]
 	[awakegame]
 	[s]
+
+
+	*badge1
+	[give_emblem id="5033" pid="468cf7fed08688bcf67e8d095ac0a22b" ]
+	[return]
+
+	*badge2
+	[give_emblem id="5036" pid="ac7570f0a635f928871fcb5ad356d02c" ]
+	[return]
+
+	*badge3
+	[give_emblem id="5035" pid="ed68d2fc6b4dc57b61863efacaa19754" ]
+	[return]
